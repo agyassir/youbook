@@ -18,3 +18,6 @@ Route::get('/', [bookController::class,'index'])->name('home');
 Route::get('/categorie', [bookController::class,'Categorie'])->name('categorie');
 Route::get('/categorie/{id}', [bookController::class,'bookInCategorie'])->name('bookInCategorie');
 Route::post('/ajouterBook', [bookController::class, 'ajouter'])->name('ajouterBook');
+Route::post('/ajouterBookmark', [bookController::class, 'bookmark'])->name('Bookmark');
+Route::get('/bookmark/{id}', [bookController::class,'MyBookmarks'])->name('bookmarked');
+

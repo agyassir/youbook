@@ -20,7 +20,7 @@
 
                 <a href="{{route('categorie')}}" class="mx-2 border-b-2 border-transparent hover:text-gray-800 dark:hover:text-gray-200 hover:border-blue-500 sm:mx-6">categories</a>
 
-                <a href="{{route('categorie')}}" class="mx-2 border-b-2 border-transparent hover:text-gray-800 dark:hover:text-gray-200 hover:border-blue-500 sm:mx-6">bookmark</a>
+                <a href="{{ url('./bookmark/1') }}"" class="mx-2 border-b-2 border-transparent hover:text-gray-800 dark:hover:text-gray-200 hover:border-blue-500 sm:mx-6">bookmark</a>
 
                 <a href="#" class="mx-2 border-b-2 border-transparent hover:text-gray-800 dark:hover:text-gray-200 hover:border-blue-500 sm:mx-6">blog</a>
 

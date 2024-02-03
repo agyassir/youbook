@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\books;
+use App\Models\bookmark;
 use App\Models\categorie;
 use Illuminate\Support\Facades\Storage;
 class bookController extends Controller
@@ -32,7 +33,7 @@ class bookController extends Controller
             "books"=> $books,
             "categories" => $categories,
         ];
-        return view('bookIncategorie', compact('books'));
+        return view('bookIncategorie', $data);
     }
 
     
@@ -58,11 +59,36 @@ class bookController extends Controller
             'description' =>  $request->description,
             'booksUrl' => Storage::url($pdfPath),
             'categorie_id' =>  $request->categorie_id,
+            
         ]);
         if (!$book) {  
             return view('bookIncategorie');
         }
         return redirect()->back()->with('success', 'Form submitted successfully!');
     }
+
+    public function bookmark(Request $request){
+            $request->validate([
+                'idUser' => 'required|integer',
+                'idBook'=>'required|integer' , 
+            ]);
+            
+            $bookmark=bookmark::create([
+                'bookid' => $request->idBook,
+                'userid' => $request->idUser,
+            ]);
+        return redirect()->back()->with('success', 'Form submitted successfully!');
+                }
+                public function MyBookmarks($id){
+                    $books = Books::join('bookmarks', 'books.id', '=', 'bookmarks.bookid')->where('bookmarks.userid', $id)->select('books.*') ->get();
+                    $categories = categorie::all();
+                    
+                    $data = [
+                        "books"=> $books,
+                        "categories" => $categories,
+                    ];
+
+                    return view('bookmark',$data);
+                }
    
 }
