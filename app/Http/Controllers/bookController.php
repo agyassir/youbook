@@ -79,7 +79,9 @@ class bookController extends Controller
             ]);
         return redirect()->back()->with('success', 'Form submitted successfully!');
                 }
-                public function MyBookmarks($id){
+
+
+        public function MyBookmarks($id){
                     $books = Books::join('bookmarks', 'books.id', '=', 'bookmarks.bookid')->where('bookmarks.userid', $id)->select('books.*') ->get();
                     $categories = categorie::all();
                     
@@ -91,4 +93,60 @@ class bookController extends Controller
                     return view('bookmark',$data);
                 }
    
+public function detail($id){
+    $categories = categorie::all();
+    $book= books::find($id);
+    // dd($book);
+    $data = [
+        "book"=> $book,
+        "categories" => $categories,
+    ];
+
+    return view('detail',$data);
+}
+public function update(Request $request){
+    $request->validate([
+        'title' => 'required|string',
+        'description' => 'required|string',
+        'categorie_id'=>'required|integer' , 
+        'bookID'=>'required|integer' , 
+    ]);
+    $bookId=$request->bookID;
+
+
+    $book = Books::find($bookId);
+
+if ($book) {
+    $books= $book->update([
+        'title' => $request->title,
+        'description' => $request->description,
+        'categorie_id' => $request->categorie_id,
+    ]);
+}
+if($books){
+    return redirect()->back()->with('success', 'book updated successfully!');
+}
+
+            }
+        
+        
+        
+        public function deleteBook($id){
+            $book = Books::find($id);
+// dd($book);
+            if($book){
+               $del= $book->delete();
+               if($del){
+       return redirect()->route('bookmarked',['id'=>1]);
+                }else{
+                echo "hadchi makhdamch";
+            }
+            }
+
+           
+        }
+        
+        
+        
+        
 }

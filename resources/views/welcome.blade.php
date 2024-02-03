@@ -39,6 +39,7 @@
 
         <div class="grid grid-cols-1 gap-8 mt-8 xl:mt-12 xl:gap-12 md:grid-cols-2 xl:grid-cols-3">
         @foreach   ($books as $book)
+        <a href="{{route('detail', ['id'=> $book->id])}}">
         <div class="overflow-hidden bg-cover rounded-lg cursor-pointer h-[550px] group"
                 style="background-image:url('https://i.insider.com/5bdcbac4bde70f50762851d6?heigth=500&format=jpeg&auto=webp');">
                 <div
@@ -47,6 +48,7 @@
                     <p class="mt-2 text-lg tracking-wider text-blue-400 uppercase ">{{$book->description}}</p>
                 </div>
             </div>
+</a>
 @endforeach
            
         </div>
