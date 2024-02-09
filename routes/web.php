@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\bookController;
+use App\Http\Controllers\authController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,5 +23,10 @@ Route::get('/delete/{id}', [bookController::class,'deleteBook'])->name('delete')
 Route::post('/ajouterBook', [bookController::class, 'ajouter'])->name('ajouterBook');
 Route::post('/updateBook', [bookController::class, 'update'])->name('update');
 Route::post('/ajouterBookmark', [bookController::class, 'bookmark'])->name('Bookmark');
-Route::get('/bookmark/{id}', [bookController::class,'MyBookmarks'])->name('bookmarked');
+Route::get('/bookmark', [bookController::class,'MyBookmarks'])->name('bookmarked');
 
+Route::get('/login', [authController::class,'login'])->name('login');
+Route::get('/register', [authController::class,'register'])->name('register');
+Route::post('/loging', [authController::class, 'loging'])->middleware('login')->name('loging');
+Route::post('/registration', [authController::class, 'registration'])->middleware('register')->name('registeration');
+Route::get('/logout', [authController::class, 'logout'])->middleware('logout')->name('logout');
